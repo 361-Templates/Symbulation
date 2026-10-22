@@ -1,86 +1,14 @@
-![Symbulation Logo](https://raw.githubusercontent.com/anyaevostinar/SymbulationEmp/main/SymbulationLogo.png "Symbulation")
+# Digital-Evolution-HW
+Starter code for a Digital Evolution assignment
 
-Symbulation is an artificial life software tool for agent-based modeling of the evolution of biological symbiosis, which can occur along the spectrum between parasitism and mutualism. 
+## Core
 
-[![CI](https://github.com/anyaevostinar/SymbulationEmp/actions/workflows/CI.yml/badge.svg)](https://github.com/anyaevostinar/SymbulationEmp/actions/workflows/CI.yml)
-[![codecov](https://codecov.io/gh/anyaevostinar/SymbulationEmp/branch/main/graph/badge.svg?token=BVQUX9SK5S)](https://codecov.io/gh/anyaevostinar/SymbulationEmp)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20732915.svg)](https://doi.org/10.5281/zenodo.20732915)
-[![Documentation Status](https://readthedocs.org/projects/symbulation/badge/?version=latest)](https://symbulation.readthedocs.io/en/latest/?badge=latest)
-[<img src="https://img.shields.io/badge/template-cookiecutter-blueviolet.svg?logo=LOGO">](https://github.com/anyaevostinar/SymbulationProjectTemplate)
-[![GitHub contributors](https://img.shields.io/github/contributors/anyaevostinar/SymbulationEmp.svg?style=flat-square)](https://github.com/anyaevostinar/SymbulationEmp/graphs/contributors)
 
-Try out our [browser-based GUI](https://anyaevostinar.github.io/SymbulationEmp/web/symbulation.html). See our documentation at [https://symbulation.readthedocs.io](https://symbulation.readthedocs.io).
 
-Interested in starting a new project with Symbulation? We have a cookiecutter template here: [https://github.com/anyaevostinar/SymbulationProjectTemplate](https://github.com/anyaevostinar/SymbulationProjectTemplate).
 
-Symbulation is built with the [Empirical platform](https://github.com/devosoft/Empirical) and the cookiecutter includes our recommended directory layout and example analysis files. 
+## Advanced
 
-## Usage
-(Note, you'll need a Python virtual environment to use cookiecutter)
-Install the latest Cookiecutter:
 
-```
-pip install -U cookiecutter
-```
 
-Generate an Symbulation project:
 
-```
-cookiecutter https://github.com/anyaevostinar/SymbulationProjectTemplate.git
-```
-
-Move into the new project directory and the `SymbulationEmp` directory and make:
-```
-cd SymbulationProject/SymbulationEmp
-make
-```
-
-Make any changes that you wish to the file `SymSettings.cfg` and then run:
-```
-./symbulation_default
-```
-
-By default, your data will be output to the files `HostVals_data__SEED10.data` and `SymVals_data__SEED10.data`.
-
-We recommend that you copy your `symbulation` executable to your `Data` folders:
-```
-cp symbulation_default ../Data/sample_treatment
-cd ../Data/sample_treatment
-```
-
-You can then use the provided Python script to run several replicates:
-```
-python3 simple_repeat.py
-```
-
-You can also then use the provided Python script to transform your data into a format more easily used by R:
-```
-cd ../../Analysis/sample_treatment
-python3 munge_data.py
-```
-
-And then open our provided R script `SampleAnalysis.R` in R, set your working directory to the `Analysis` directory and then run all lines to observe the effect of vertical transmission rate on the interaction value evolved.
-
-## Notes
-SGP-mode is a prototype and minimally tested.
-
-## Citations
-Symbulation is built with:
-
-* Vostinar et al. (2024). Empirical: A scientific software library for research, education, and public engagement. Journal of Open Source Software,
-9(98), 6617. [https://doi.org/10.21105/joss.06617](https://doi.org/10.21105/joss.06617).
-
-    <a href="https://github.com/devosoft/Empirical"><img src="EmpiricalBanner.png" width="300"></a>
-
-* Moreno, Matthew Andres, et al. "SignalGP-Lite: Event Driven Genetic Programming Library for Large-Scale Artificial Life Applications." arXiv preprint arXiv:2108.00382 (2021). [https://arxiv.org/pdf/2108.00382](https://arxiv.org/pdf/2108.00382)
-
-    <a href="https://github.com/mmore500/signalgp-lite"><img src="SGPLite-Logo.jpg" width="300"></a>
-
-* Dolson, Emily, Santiago Rodriguez-Papa, and Matthew Andres Moreno. "Phylotrack: C++ and python libraries for in silico phylogenetic tracking." arXiv preprint arXiv:2405.09389 (2024) [https://arxiv.org/pdf/2405.09389](https://arxiv.org/pdf/2405.09389)
-
-## How to Cite
-```
-Vostinar, A., Johnson-Horrigan, K., Lalejini, A., Dolson, E., Hillman-Emelianoff, E., Shea, J., Kelley, D., Khalili, A. T., Welch, P., Cameron, A., Orion Hafner, L., Dorchen, S., Gormely, C., renztim, Ofria, C., Qin, Y., & mkmmnn. (2026). anyaevostinar/SymbulationEmp: ComplexFeatures (Version v1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20732915
-```
-
-Created part of my free logo at LogoMakr.com.
+## AI Log

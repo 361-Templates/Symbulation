@@ -97,13 +97,15 @@ public:
    */
   SGPSymAnimate() : animation("emp_animate"), settings("emp_settings"), explanation("emp_explanation"), learnmore("emp_learnmore"), buttons("emp_buttons") {
 
-    config.WORLD_WIDTH(30);
-    config.WORLD_HEIGHT(30);
+    config.WORLD_WIDTH(70);
+    config.WORLD_HEIGHT(70);
     config.CYCLES_PER_UPDATE(16);
     config.UPDATES(30000);
-    config.HOST_REPRO_RES(5);
-    config.START_MOI(1);
-
+    config.HOST_REPRO_RES(128);
+    config.START_MOI(0);
+    config.TASK_ENV_CFG_PATH("default-config-jsons/diff-reward-env.json");
+    config.ENABLE_HEALTH(true);
+    config.HEALTH_TYPE("parasite");
     
     animation.SetCSS("flex-grow", "1");
     animation.SetCSS("max-width", "500px");
@@ -132,79 +134,24 @@ public:
     initializeWorld();
 
     emp::prefab::ConfigPanel config_panel(config, true);
-    //Exclude all the settings that control
-    //things that don't show up in the GUI correctly
-    config_panel.ExcludeSetting("SYM_LIMIT");
-    config_panel.ExcludeSetting("DATA_INT");
-    config_panel.ExcludeSetting("POP_SIZE");
-    config_panel.ExcludeSetting("FILE_PATH");
-    config_panel.ExcludeSetting("FILE_NAME");
-    config_panel.ExcludeSetting("COMPETITION_MODE");
-    config_panel.ExcludeSetting("SYM_INFECTION_CHANCE");
-    config_panel.ExcludeSetting("SYM_INFECTION_FAILURE_RATE");
-    config_panel.ExcludeSetting("MUTATION_SIZE");
-    config_panel.ExcludeSetting("HOST_MUTATION_SIZE");
-    config_panel.ExcludeSetting("HOST_MUTATION_SIZE");
-    config_panel.ExcludeSetting("MUTATE_LYSIS_CHANCE");
-    config_panel.ExcludeSetting("MUTATE_INDUCTION_CHANCE");
-    config_panel.ExcludeSetting("MUTATE_INT_VAL");
-    config_panel.ExcludeSetting("MUTATE_INDUCTION_CHANCE");
-    config_panel.ExcludeSetting("EFFICIENCY_MUT_RATE");
-    config_panel.ExcludeSetting("INT_VAL_MUT_RATE");
-    config_panel.ExcludeSetting("HORIZ_MUTATION_SIZE");
-
-    config_panel.ExcludeSetting("DONATION_STEAL_INST");
-    config_panel.ExcludeSetting("SYM_DONATE_PROP");
-    config_panel.ExcludeSetting("SYM_STEAL_PROP");
-    config_panel.ExcludeSetting("INTERACTION_MECHANISM");
-
-    config_panel.ExcludeSetting("PHYLOGENY");
-    config_panel.ExcludeSetting("NUM_PHYLO_BINS");
-
-    config_panel.ExcludeSetting("PARASITE_NUM_OFFSPRING_ON_STRESS_INTERACTION");
-
-    config_panel.ExcludeSetting("HORIZONTAL_TRANSMISSION_COMPATIBILITY_MODE");
-    config_panel.ExcludeSetting("TASK_PROFILE_COMPATIBILITY_MODE");
-    config_panel.ExcludeSetting("NUM_PHYLO_BINS");
-
-    config_panel.ExcludeGroup("LYSIS");
-    config_panel.ExcludeGroup("DTH");
-    config_panel.ExcludeGroup("PGG");
+    //Exclude all the settings at first because there are lot
+    config_panel.ExcludeGroup("MAIN");
+    config_panel.ExcludeGroup("SPATIAL_STRUCTURE");
+    config_panel.ExcludeGroup("PHYLOGENY_GROUP");
+    config_panel.ExcludeGroup("MUTATION");
     config_panel.ExcludeGroup("ECTOSYMBIOSIS_GROUP");
     config_panel.ExcludeGroup("TAG_MATCHING_GROUP");
-    config_panel.ExcludeGroup("PHYLOGENY_GROUP");
-    config_panel.ExcludeGroup("TEMP_CHANGING_ENVIRONMENT");
-  
+    config_panel.ExcludeGroup("SGP");
+    config_panel.ExcludeGroup("CUSTOM_PROGRAM");
+    config_panel.ExcludeGroup("STRESS");
+    config_panel.ExcludeGroup("HEALTH");
+    config_panel.ExcludeGroup("NUTRIENT");
+    config_panel.ExcludeGroup("TASK_ENVIRONMENT");
+    config_panel.ExcludeGroup("EVENTS");
+    config_panel.ExcludeGroup("INSTRUCTIONS");
+    config_panel.ExcludeGroup("DATA");
 
-    config_panel.SetRange("HOST_INT", "-2", "1");
-    config_panel.SetRange("SYM_INT", "-2", "1");
-    config_panel.SetRange("SYM_AGE_MAX", "-1", "10000");
-    config_panel.SetRange("HOST_AGE_MAX", "-1", "10000");
-    config_panel.SetRange("LIMITED_RES_TOTAL", "-1", "10000");
     
-    config_panel.SetRange("CYCLES_PER_UPDATE", "1", "16","1");
-    config_panel.SetRange("FIND_NEIGHBOR_HOST_ATTEMPTS", "1", "16","1");
-    config_panel.SetRange("HOST_MIN_CYCLES_BEFORE_REPRO", "0", "640","1");
-    config_panel.SetRange("SYM_MIN_CYCLES_BEFORE_REPRO", "0", "640","1");
-
-    config_panel.SetRange("STRESS_FREQUENCY", "0.0", "5000","1");
-    config_panel.SetRange("PARASITE_DEATH_CHANCE", "0.0", "1.0","0.01");
-    config_panel.SetRange("MUTUALIST_DEATH_CHANCE", "0.0", "1.0","0.01");
-    config_panel.SetRange("BASE_DEATH_CHANCE", "0.0", "1.0","0.01");
-    config_panel.SetRange("PARASITE_NUM_OFFSPRING_ON_STRESS_INTERACTION", "0", "16","1");
-
-    config_panel.SetRange("MUTUALIST_CYCLE_GAIN_PROP", "0.0", "1.0","0.01");
-    config_panel.SetRange("MUTUALIST_CYCLE_DONATE_MULTIPLIER", "0.0", "10.0","0.1");
-    config_panel.SetRange("PARASITE_CYCLE_LOSS_PROP", "0.0", "1.0","0.01");
-    config_panel.SetRange("PARASITE_CYCLE_STEAL_MULTIPLIER", "0.0", "10.0","0.1");
-    config_panel.SetRange("PARASITE_BASE_CYCLE_PROP", "0.0", "1.0","0.01");
-    config_panel.SetRange("HEALTH_INTERACTION_CHANCE", "0.0", "1.0","0.01");
-
-    config_panel.SetRange("NUTRIENT_DONATE_PROP", "0.0", "1.0","0.01");
-    config_panel.SetRange("NUTRIENT_STEAL_PROP", "0.0", "1.0","0.01");
-    config_panel.SetRange("NUTRIENT_INTERACTION_MULTIPLIER", "0.0", "10.0","0.1");
-    config_panel.SetRange("PARASITE_BASE_TASK_VALUE_PROP", "0.0", "1.0","0.01");
-
     emp::prefab::Card config_panel_ex("INIT_CLOSED");
     config_panel_ex.AddHeaderContent("<h3>Settings</h3>");
 
@@ -470,7 +417,7 @@ public:
     else if(taskComplete == 6){return "#ffc400";}
     else if(taskComplete == 7){return "#ff6200";}
     else if(taskComplete == 8){return "#ff0000";}
-
+    else {return "#ffffff";}
   }
 
   

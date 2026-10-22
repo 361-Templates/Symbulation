@@ -23,10 +23,10 @@ CXX_web := emcc
 # TASK_ENV_CFG_PATH in source/sgp_mode/SGPConfigSetup.h and SPATIAL_STRUCT_CFG_PATH
 # in source/ConfigSetup.h -- are resolved from the filesystem root at startup.
 # Also USE_ZLIB backs uitsl::autoinstall's gzip support
-OFLAGS_web_all := -s "EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap', 'stringToUTF8', 'UTF8ToString']" -s TOTAL_MEMORY=268435456 --js-library $(EMP_DIR)/emp/web/library_emp.js -s EXPORTED_FUNCTIONS="['_main', '_empCppCallback', '_empDoCppCallback']" -s DISABLE_EXCEPTION_CATCHING=1 -s NO_EXIT_RUNTIME=1 -s ASSERTIONS=1 -s USE_ZLIB=1 --embed-file example-settings-cfg/environment.json@/environment.json --embed-file web/sfx/short_beep.wav@/short_beep.wav --embed-file example-settings-cfg/spatial-struct.mat@/spatial-struct.mat --embed-file example-settings-cfg/spatial-struct-edges.csv@/spatial-struct-edges.csv
+OFLAGS_web_all := -s "EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap', 'stringToUTF8', 'UTF8ToString']" -s TOTAL_MEMORY=268435456 --js-library $(EMP_DIR)/emp/web/library_emp.js -s EXPORTED_FUNCTIONS="['_main', '_empCppCallback', '_empDoCppCallback','_malloc', '_free']" -s DISABLE_EXCEPTION_CATCHING=1 -s NO_EXIT_RUNTIME=1 -s ASSERTIONS=1 -s USE_ZLIB=1 --embed-file example-settings-cfg/environment.json@/environment.json --embed-file web/sfx/short_beep.wav@/short_beep.wav --embed-file example-settings-cfg/spatial-struct.mat@/spatial-struct.mat --embed-file example-settings-cfg/spatial-struct-edges.csv@/spatial-struct-edges.csv
 OFLAGS_web := -Oz -DNDEBUG -fpermissive -s DEFAULT_LIBRARY_FUNCS_TO_INCLUDE='$$allocate,$$ALLOC_STACK,$$stringToUTF8OnStack'
 OFLAGS_web_debug := -g4 -Oz -pedantic -Wno-dollar-in-identifier-extension
-OFLAGS_sgp_web := -s INITIAL_MEMORY=536870912 
+OFLAGS_sgp_web := -s INITIAL_MEMORY=536870912 --embed-file default-config-jsons@/default-config-jsons
 CFLAGS_web := $(CFLAGS_all) $(OFLAGS_web) $(OFLAGS_web_all)
 CFLAGS_web_debug := $(CFLAGS_all) $(OFLAGS_web_debug) $(OFLAGS_web_all)
 CFLAGS_sgp_web := $(CFLAGS_all) $(OFLAGS_web) $(OFLAGS_web_all) $(OFLAGS_sgp_web)
